@@ -694,5 +694,29 @@ class Paystack
         $this->setRequestOptions();
         return $this->setHttpResponse("/subaccount/{$subaccount_code}", "PUT", array_filter($data))->getResponse();
 
+    }    
+
+    /**
+     * Fetch banks on Paystack
+     * @return array
+     * @link https://paystack.com/docs/api/#miscellaneous
+     */
+    public function getBanks($country, $use_cursor = false, $perPage = 50 /*, $next = '', $previous = '', $gateway = '', $type = ''*/)
+    {
+        $data = [
+            'country' => $country,
+            'use_cursor' => $use_cursor,
+            'perPage' => $perPage
+            /*'next' => $next,
+            'previous' => $previous,
+            'gateway' => $gateway,
+            'type' => $type,*/
+        ];
+        
+        $query = http_build_query($data);
+        
+        $this->setRequestOptions();
+
+        return $this->setHttpResponse("/bank?" . $query, 'GET')->getData();
     }
 }
