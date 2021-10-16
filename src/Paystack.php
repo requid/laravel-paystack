@@ -717,6 +717,6 @@ class Paystack
         
         $this->setRequestOptions();
 
-        return $this->setHttpResponse("/bank?" . $query, 'GET')->getData();
+        return $this->setHttpResponse("/bank?" . $query, 'GET')->getResponse();
     }
 }
