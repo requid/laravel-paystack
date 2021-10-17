@@ -719,4 +719,23 @@ class Paystack
 
         return $this->setHttpResponse("/bank?" . $query, 'GET')->getResponse();
     }
+    
+    /**
+     * Resolve Account Number on Paystack
+     * @return array
+     * @link https://paystack.com/docs/api/#verification
+     */
+    public function resolveAccount($account_number, $bank_code)
+    {
+        $data = [
+            'account_number' => $account_number,
+            'bank_code' => $bank_code
+        ];
+        
+        $query = http_build_query($data);
+        
+        $this->setRequestOptions();
+
+        return $this->setHttpResponse("/resolve?" . $query, 'GET')->getData();
+    }
 }
